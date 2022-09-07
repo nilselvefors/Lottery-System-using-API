@@ -1,4 +1,4 @@
-This project was made by Nils Elvefors and Pajtim Cerimi
+This project was made by Nils Elvefors
 
 We want to get the full amount of points possible (2 p).
 
