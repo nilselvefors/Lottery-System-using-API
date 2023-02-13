@@ -1,12 +1,9 @@
 This project was made by Nils Elvefors
 
-We want to get the full amount of points possible (2 p).
-
 The user can place bets and see old historical information
-about past bets and winners(1 p)
-The API communicates via JSON (0.5 p)
-The API sends an email to all the winners each round (0.5 p)
-
+about past bets and winners
+The API communicates via JSON
+The API sends an email to all the winners each round
 
 The API draws a winner each hole hour of every day, 24/7.
 If there is a winner with the correct number the API will email the
