@@ -1,82 +1,143 @@
-This project was made by Nils Elvefors
 
-The user can place bets and see old historical information
-about past bets and winners
-The API communicates via JSON
-The API sends an email to all the winners each round
-
-The API draws a winner each hole hour of every day, 24/7.
-If there is a winner with the correct number the API will email the
-winner about the winnings!
-If there is no winner, the pot of money will get transferred to the new waffle.
-
-(The email will probably end up in the "trash" folder)
-
-To close the program, press CTRL-C two times!!!
-
-instructions of usage:
-
-Place a bet:
-
-To place a bet you will need to send a POST-request to the server with the
-following parameters:
-(All of the parameter-names needs to be in uppercase letters!!!)
-
-NAME: Your name
-NUMBER: The number you want to guess
-EMAIL: Your email address
-DATE: The date you want guess the specific number (format yyyy-mm-dd)
-TIME: The specific time of that day you want guess the specific number (format HH)
-
-Example:
-I think number 100 will win the raffle at 19th of December 2024 at 15:00
-My parameters will be the following:
-NAME: Nils Elvefors
-NUMBER: 100
-EMAIL: nils@elvefors.com
-DATE: 2024-12-19
-TIME: 15
+# Lottery System API
 
 
-To place multiple bets with one query, specify the date, time and number for
-each bet you want to create.
-
-Example:
-I want to place 3 bets:
-
-Number 10 at 15:00, 2020-01-01
-Number 77 at 10:00, 2020-11-07
-Number 100 at 00:00, 2027-01-07
-
-Correct query for this is:
-NAME: Nils Elvefors
-NUMBER: [10, 77, 100]
-EMAIL: nils@elvefors.com
-DATE: [2020-01-01,2020-11-07,2027-01-07]
-TIME: [15, 10, 00]
+This project is a REST API built using Python3 and the Flask web framework. It provides a simulation of a lottery system, allowing users to place multiple bets at once through POST requests and view the history of previous bets through GET requests. Additionally, users are able to specify a specific time period when retrieving the history of placed bets. The API makes use of the powerful data manipulation capabilities of the Pandas library to handle and save new bets, as well as to retrieve and filter historical placed bets. The bets placed through the API are saved as CSV files, providing a convenient and accessible means of storing and retrieving data. This API offers a user-friendly, flexible, and efficient solution for those looking to implement a lottery system, making it easy to place bets, retrieve information about past betting activity, and manage the underlying data.
 
 
+## Authors
 
-Get historical data:
-
-To get historical data you will need to preform a GET-request to the server.
-You don't need to use any parameters but you can if you want a
-more specific time period to look at.
-If you don't use any parameters you will get all the bets and winners ever made
-to the server.
+- [@Nils Elvefors](https://github.com/nilselvefors)
 
 
-If you want a more specific time period you use parameters named "start"
-and "end".
-You have to use both of them.
+## API Reference
 
-The "start" parameter indicates the date at which you want to start the
-historical data from.
-The "end" parameter indicates the date at which you want to stop the
-historical data.
+#### Place bet
 
-Example:
-Get historical data from 2010-12-01 until 2020-01-20
+```http
+  POST /
+```
 
-start: 2010-12-01
-end:   2020-01-20
+| Parameter | Type | Required   | Fortmat|                    
+| :-------- | :------- | :-------   |:-------|
+| `NAME`   | `string` |  **True** |       |
+| `NUMBER`   | `int`   |  **True** |        |
+| `EMAIL`   | `string`   |  **True** |      |
+| `DATE`   | `string`   |  **True** |    yyyy-mm-dd    |
+| `TIME`   | `string`   |  **True** |    hh    |
+
+#### Get historical data
+
+```http
+  GET /
+```
+
+| Parameter | Type     | Required   | Info |                    
+| :-------- | :------- | :-------   |:-------|
+| `start`   | `string` |  **False** |  Used in combination with end-parameter      |
+| `end`   | `string`   |  **False** |   Used in combination with start-parameter        |
+
+
+## Installation
+
+#### Install requirements
+```bash
+pip install -r Lottery-System-using-API/requirements.txt
+```
+
+#### Start server
+```bash
+python3 Lottery-System-using-API/API.py 
+```
+## Making requests to server
+
+#### Place single bet
+
+```python
+import requests
+
+# declaring URL
+URL = ""
+
+# declaring parameters
+PARAMS = {
+    NAME: "Nils Elvefors",
+    NUMBER: 100,
+    EMAIL: "my@email.com",
+    DATE: "2023-05-10",
+    TIME: "13"
+}
+
+# sending request
+response = requests.post(url = URL, params = PARAMS)
+  
+# extracting data in json format
+data = response.json()
+```
+
+
+#### Place multiple bets
+
+```python
+import requests
+
+# declaring URL
+URL = ""
+
+# declaring parameters
+PARAMS = {
+    NAME: "Nils Elvefors",
+    NUMBER: [100,10,35,22],
+    EMAIL: "my@email.com",
+    DATE: ["2023-05-10","2023-01-18","2023-01-18","2023-02-18"],
+    TIME: ["13","03","21","00"]
+}
+
+# sending request
+response = requests.post(url = URL, params = PARAMS)
+  
+# extracting data in json format
+data = response.json()
+```
+
+
+#### Retrieve all placed bets
+
+```python
+import requests
+
+# declaring URL
+URL = ""
+
+# sending request
+response = requests.get(url = URL)
+  
+# extracting data in json format
+data = response.json()
+```
+
+#### Retrieve bets placed in specific time period 
+
+```python
+import requests
+
+# declaring URL
+URL = ""
+
+# declaring parameters
+PARAMS = {
+    start: "2010-12-01",
+    end: "2011-05-01",
+}
+
+# sending request
+response = requests.get(url = URL, params = PARAMS)
+  
+# extracting data in json format
+data = response.json()
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
