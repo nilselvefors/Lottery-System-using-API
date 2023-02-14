@@ -2,7 +2,9 @@
 # Lottery System API
 
 
-This project is a REST API built using Python3 and the Flask web framework. It provides a simulation of a lottery system, allowing users to place multiple bets at once through POST requests and view the history of previous bets through GET requests. Additionally, users are able to specify a specific time period when retrieving the history of placed bets. The API makes use of the powerful data manipulation capabilities of the Pandas library to handle and save new bets, as well as to retrieve and filter historical placed bets. The bets placed through the API are saved as CSV files, providing a convenient and accessible means of storing and retrieving data. This API offers a user-friendly, flexible, and efficient solution for those looking to implement a lottery system, making it easy to place bets, retrieve information about past betting activity, and manage the underlying data.
+This project is a REST API built using Python3 and the Flask web framework. It provides a simulation of a lottery system, allowing users to place multiple bets at once through POST requests and view the history of previous bets through GET requests. Additionally, users are able to specify a specific time period when retrieving the history of placed bets.
+<br>The API makes use of the powerful data manipulation capabilities of the Pandas library to handle and save new bets, as well as to retrieve and filter historical placed bets. The bets placed through the API are saved as CSV files, providing a convenient and accessible means of storing and retrieving data.
+<br>This API offers a user-friendly, flexible, and efficient solution for those looking to implement a lottery system, making it easy to place bets, retrieve information about past betting activity, and manage the underlying data.
 
 
 ## Authors
